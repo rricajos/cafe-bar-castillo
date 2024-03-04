@@ -1,14 +1,29 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <!-- <link rel="icon" type="image/svg+xml" href="/vite.svg" /> -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cafe Bar Castillo</title>
-    <script type="module" crossorigin src="https://rricajos.github.io/cafe-bar-castillo/assets/index-DZ5FO43q.js"></script>
-    <link rel="stylesheet" crossorigin href="https://rricajos.github.io/cafe-bar-castillo/assets/index-i4e-IPmL.css">
-  </head>
-  <body>
-    <div id="app"></div>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <!-- <link rel="icon" type="image/svg+xml" href="/vite.svg" /> -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cafe Bar Castillo</title>
+  <script type="module" crossorigin src="https://rricajos.github.io/cafe-bar-castillo/assets/index-BJc7urKs.js"></script>
+  <link rel="stylesheet" crossorigin href="https://rricajos.github.io/cafe-bar-castillo/assets/index-CPWhebut.css">
+</head>
+
+<body>
+  <div id="app"></div>
+ 
+  <script>
+   function run() {
+    const date = new Date();
+    const currentDayOfWeek = date.getDay();
+    const currentTime = date.toLocaleTimeString();
+    document.getElementById(`w${currentDayOfWeek}`).style.fontWeight = "bold";
+   
+   }
+    
+    // .style.fontWeight = 'bolder';
+  </script>
+</body>
+
 </html>

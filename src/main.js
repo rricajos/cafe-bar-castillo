@@ -11,4 +11,6 @@ const app = new App({
 // document.getElementById(`w${currentDayOfWeek}`).style.fontWeight = "bold";
 
 
+
+
 export default app

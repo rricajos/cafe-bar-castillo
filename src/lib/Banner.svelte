@@ -1,34 +1,70 @@
 <script>
-  // @ts-nocheck
+  export let response;
 
-  let response = fetch(
-    "https://places.googleapis.com/v1/places/ChIJ_____0yoOg0RsOKhy-g0La8?fields=*&key=AIzaSyC7WEdWGr1XSBSEysKV420dzzmqtriFguI",
-  )
-    .then((res) => res.json())
-    .then((data) => {
-      response = data;
-      console.log(response);
-    });
+//   function groupPeriodsByDay(periods) {
+//     const groupedPeriods = {};
+
+//     periods.forEach(period => {
+//         const openDay = period.open.day;
+//         const closeDay = period.close.day;
+
+//         if (!groupedPeriods[openDay]) {
+//             groupedPeriods[openDay] = [];
+//         }
+
+//         if (!groupedPeriods[closeDay]) {
+//             groupedPeriods[closeDay] = [];
+//         }
+
+//         groupedPeriods[openDay].push(period);  
+//         groupedPeriods[closeDay].push(period);
+//     });
+
+//     return groupedPeriods;
+// }
+
+// const groupedPeriods = groupPeriodsByDay();
+// console.log(groupedPeriods);
 </script>
 
 <header>
-  {#await response}
-    <h1>cargando</h1>
-  {:then response}
+  {#await response then response}
     <!-- Banner -->
     <div id="banner">
-      <h1>{response.displayName.text}</h1>
-      <hr>
-      <h2> «Disfruta de la vida con cada bocado y trago.» </h2>
-      <aside>
-        {#each { length: response.rating } as _, i}
-          <span class="fa fa-star checked"></span>
-        {/each}
-      </aside>
-    </div>
+      
+      <fieldset>
+        <legend>
+          <aside>
+            {#each { length: response.rating-0.5 } as _, i}
+              <span class="fa fa-star checked"></span>
+            {/each}
+            {#if (response.rating*10)%2 != 0}
+            <div>
+              <span class="fa fa-star half-star-a">
+                <span class="fa fa-star-half checked half-star-b"></span>
+              </span>
+            </div>
+            {/if}
+          </aside>
+    
+        </legend>
+        <table>
+          <tr>
+            <h1>{response.displayName.text}</h1>
+            
+          </tr>
+        </table>
+      </fieldset>
+      <!-- <a href="{response.googleMapsUri}" target="_blank">
+        <p>{response.userRatingCount} reseñas en Google Maps</p>
+      </a>  -->
+    
 
+     
+    </div>
+    <img src="{response.photos[0].name}" alt="">
     <!-- Schedule -->
-    <div id="schedule">
+    <!-- <div id="schedule">
       {#each response.currentOpeningHours.weekdayDescriptions as day}
       <div class="schedule-card">
         <h3>{day.split(' ')[0].split(':')[0]}</h3>
@@ -37,10 +73,10 @@
       </div>
       
       {/each}
-    </div>
+    </div> -->
 
     <!-- Location -->
-    <div id="location">
+    <!-- <div id="location">
       <iframe
         title="Google Maps Cafe Bar Castillo Maceda"
         width="100%"
@@ -52,63 +88,69 @@
         src="https://maps.google.com/maps?width=100%25&amp;height=1000&amp;hl=en&amp;q=R%C3%BAa%20As%20Canteiras,%201,%2032700%20Maceda,%20Province%20of%20Ourense+(Cafe%20Bar%20Castillo)&amp;t=&amp;z=18&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
         ><a href="https://www.gps.ie/sport-gps/">swimming watch</a></iframe
       >
-    </div>
+    </div> -->
   {/await}
 </header>
 
 <style>
-  #location {
-    min-height: 40vh;
+  .half-star-a {
+    position: relative;
   }
+
+  .half-star-b {
+    position: absolute;
+    top: 0;
+    transform: translate(-210%, -11%);
+    z-index: 2;
+
+  }
+
+
   #banner {
     min-height: 20vh;
-    margin: 2rem;
+    margin: 2rem 2rem 0 2rem;
   }
-  h1, h2, h3 {
-    margin: 0;
+  h1 {
+    margin: 0 1rem;
   }
+
   header {
-    height: 100vh;
+
     display: flex;
     flex-flow: column nowrap;
     justify-content: space-around;
+  }
+  table { 
+    width: 100%;
+  }
+  fieldset {
+    text-align: center;
+    padding: 2rem 0;
+    position: relative;
+
+    border: 3px double #333;
 
   }
   aside {
+    padding: 0 1rem;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 50%);
+    background: white;
     display: flex;
-    flex-flow: row wrap;
+    flex-flow: row nowrap;
     justify-content: center;
+    align-items: center;
   }
   span {
-    margin: 1rem;
-    font-size: 2rem;
+    margin: 0.2rem;
+    font-size: 1.8rem;
+    text-shadow: 0px 0px 1rem #3333335d;
   }
   .checked {
     color: orange;
   }
 
-  #schedule {
- 
-    display: flex;
-    flex-flow: row nowrap;
-    overflow-x: auto;
-    overflow-y: hidden;
-    justify-content: center;
-  } 
-  .schedule-card {
-    min-width: 8rem;
-    border-radius: 50%;
 
-    margin: 0.5rem;
-    padding: 1.5rem 0;
-    background-color: #10101034;
-  }
-
-  p {
-    margin: 0
-  }
-
-  iframe > * {
-    font-size: 1.25rem;
-  }
 </style>

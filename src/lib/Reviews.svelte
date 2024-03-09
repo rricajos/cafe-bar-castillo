@@ -1,16 +1,23 @@
 <script>
   export let response;
-  
 </script>
 
 {#await response then response}
-
-<h2>
-  Reseñas
-  <hr>
-</h2>
+  <div style="margin: 0 2rem; text-align:center">
+    <fieldset style="position: relative; padding: 2rem 2rem 3rem 2rem; margin: 1rem 0 0 0">
+      <legend style="position: absolute; bottom: 0rem; left: 50%;  transform: translate(-50%, 50%);">
+        <button>Escribenos</button>
+      </legend>
+      <table>
+        <tr>
+          <h2>Gracias por hacernos más visibles y decirnos como mejorar cada día.</h2>
+    
+        </tr>
+      </table>
+    </fieldset>
+  </div>
   <!-- Banner -->
-  <div id="banner">
+  <div style="margin: 0 2rem;">
     <div class="reviews">
       {#each response.reviews as review}
         <article class="review">
@@ -22,12 +29,16 @@
                 width="64rem"
               />
             </a>
-            <div>
-              <h3>{review.authorAttribution.displayName}</h3>
-              <div class="review-head-details">
-                <h3><sup>{review.relativePublishTimeDescription}</sup></h3>
 
-                <div>
+            <div>
+              <a href={review.authorAttribution.uri}>
+                <h3>{review.authorAttribution.displayName}</h3>
+              </a>
+
+              <div class="review-head-details">
+                <h4><sup>{review.relativePublishTimeDescription}</sup></h4>
+
+                <div class="review-head-sub-details">
                   {#each { length: review.rating } as _, i}
                     <span
                       class="fa fa-star checked"
@@ -49,9 +60,18 @@
   </div>
 {/await}
 
-
 <style>
+  hr {
+    margin: 0;
+  }
+  .review-head-sub-details {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    align-items: baseline;
+  }
   .review-head-details {
+    margin-top: 0.25rem;
     display: flex;
     flex-flow: row wrap;
     justify-content: flex-start;
@@ -59,7 +79,8 @@
   .reviews {
     display: flex;
     flex-flow: row wrap;
-    justify-content: center
+    justify-content: center;
+    margin-bottom: 3rem;
   }
   .review {
     display: flex;
@@ -69,7 +90,8 @@
 
     box-sizing: border-box;
     max-width: 400px;
-    margin-top: 1rem;
+    margin-top: 3rem;
+
     margin-inline: 1rem;
   }
 
@@ -82,31 +104,12 @@
     justify-content: flex-start;
   }
 
-  #location {
-    min-height: 40vh;
-  }
-  #banner {
-    min-height: 20vh;
-    margin: 2rem;
-  }
-  h1,
   h2,
-  h3 {
+  h3,
+  h4 {
     margin: 0 1rem;
   }
-  article {
-  }
-  header {
-    min-height: 100vh;
-    display: flex;
-    flex-flow: column nowrap;
-    justify-content: space-around;
-  }
-  aside {
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: center;
-  }
+
   span {
     margin: 1rem;
     font-size: 2rem;
@@ -115,34 +118,14 @@
     color: orange;
   }
 
-  #schedule {
-    display: flex;
-    flex-flow: row nowrap;
-    overflow-x: auto;
-    overflow-y: hidden;
-    justify-content: center;
-  }
-  .schedule-card {
-    min-width: 8rem;
-    border-radius: 50%;
-
-    margin: 0.5rem;
-    padding: 1.5rem 0;
-    background-color: #10101034;
-  }
-
   p {
     margin: 0;
   }
 
-  iframe > * {
-    font-size: 1.25rem;
-  }
-
   h2 {
-    text-align: left;
+    text-align: center;
     margin: 0;
-    padding: 5rem 2rem 0 2rem;
+    padding: 0rem 0rem 0 0rem;
   }
   hr {
 
@@ -152,5 +135,28 @@
     overflow: visible;
     text-align: center;
     height: 5px;
+  }
+
+  fieldset {
+    border: none;
+    border: 3px double #333;
+
+  }
+  table {
+    width: 100%;
+  }
+  i {
+    margin: 0 0 0 1rem;
+  }
+  tr {
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: baseline;
+  }
+
+  button {
+    border: none;
+    border: 3px double #333;
   }
 </style>

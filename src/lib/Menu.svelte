@@ -53,6 +53,7 @@
     box-sizing: border-box;
   }
   hr {
+    margin: 0 0 1rem 0;
     border: none;
     border-top: 3px double #333;
     color: #333;
@@ -64,6 +65,7 @@
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
+    padding-bottom: 1rem;
   }
   .separator {
 
@@ -94,6 +96,6 @@
   }
   p{
     text-wrap: nowrap;
-    margin: 0.25rem 0;
+    margin: 0;
   }
 </style>
